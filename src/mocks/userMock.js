@@ -10,16 +10,5 @@ export const mockedUser = {
   },
   hashedPassword() {
     return bcrypt.hashSync(this.password, 10);
-
-
-
-
-
-
-
-
-
-
-    
   },
 };
