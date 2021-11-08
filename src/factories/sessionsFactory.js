@@ -8,7 +8,7 @@ export async function addNewSession() {
   };
 
   await connection.query(
-    `INSERT INTO logged_users (token, user_id) VALUES ($1, $2);`,
+    'INSERT INTO logged_users (token, user_id) VALUES ($1, $2);',
     [data.token, data.id]
   );
 
