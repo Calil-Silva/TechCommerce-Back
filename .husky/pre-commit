@@ -3,3 +3,4 @@
 
 npx eslint src
 npx jest
+npx eslint src
