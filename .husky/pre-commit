@@ -3,4 +3,4 @@
 
 npx eslint src
 npx jest
-npm run test
+npm run teste
