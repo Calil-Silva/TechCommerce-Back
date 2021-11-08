@@ -18,6 +18,6 @@ describe('POST /register', () => {
     };
 
     const result = await agent.post('/register').send(user);
-    expect(result.status).toEqual(500);
+    expect(result.status).toEqual(201);
   });
 });

@@ -4,7 +4,7 @@ export default async function categories (req, res) {
 
     try {
         const result = await connection.query(`
-            SELECT *
+            SELECT name, url_image
             FROM categories;
         `)
         return res.status(200).send(result.rows);
