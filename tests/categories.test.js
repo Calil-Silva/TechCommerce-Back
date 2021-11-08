@@ -24,7 +24,7 @@ describe('Route GET /categories', () => {
         expect(result.status).toEqual(200)
     });
 
-    test('should return 200 when everything goes well. ', async () => {
+    test('should return a array objects when everything goes well. ', async () => {
         const result = await agent.get('/categories')
         const expected = [
             {
