@@ -5,6 +5,7 @@ import connection from '../src/database/database.js';
 import { InsertAllCategories } from '../src/factories/categoriesFactory.js';
 
 const agent = supertest(app);
+const usn = [];
 
 afterAll( async () => {
     await connection.query("DELETE FROM categories");
