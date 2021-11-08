@@ -9,6 +9,7 @@ export default async function signup(req, res) {
       [name, email, password]
     );
     res.sendStatus(201);
+    
   } catch (error) {
     res.sendStatus(500);
   }
