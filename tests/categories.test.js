@@ -5,7 +5,6 @@ import connection from '../src/database/database.js';
 import { InsertAllCategories } from '../src/factories/categoriesFactory.js';
 
 const agent = supertest(app);
-const usn = [];
 
 afterAll( async () => {
     await connection.query("DELETE FROM categories");
@@ -50,7 +49,7 @@ describe('Route GET /categories', () => {
             },
             {
               name: 'Acessories',
-              url_image: 'hhttps://photos5.appleinsider.com/archive/appleaccessories.jpg'
+              url_image: 'https://photos5.appleinsider.com/archive/appleaccessories.jpg'
             }
           ]
         expect(result.body).toMatchObject(expected)
