@@ -49,7 +49,7 @@ describe('Route GET /categories', () => {
             },
             {
               name: 'Acessories',
-              url_image: 'https://photos5.appleinsider.com/archive/appleaccessories.jpg'
+              url_image: 'hhttps://photos5.appleinsider.com/archive/appleaccessories.jpg'
             }
           ]
         expect(result.body).toMatchObject(expected)
