@@ -26,12 +26,24 @@ describe('POST /signin', () => {
     await deleteUser();
   });
 
-  test('Should return status code 202', async () => {
+  test('Should return status code 200 and a body with user_id and token, if user is registered', async () => {
     const connectionData = {
       email: mockedUser.email,
       password: mockedUser.password,
     };
     const result = await agent.post('/signin').send(connectionData);
-    expect(result.status).toEqual(202);
+    expect(result.status).toEqual(200);
+    expect(result.body).toHaveProperty('token');
+  });
+
+  test('Sould return status code 400, if user is not registered or has passed invalid credentials', async () => {
+    const connectionData = {
+      email: mockedUser.email,
+      password: mockedUser.fakePassword(),
+    };
+
+    const result = await agent.post('/signin').send(connectionData);
+    expect(result.status).toEqual(400);
+    expect(result.body).toEqual({ message: 'Usuário ou senha incorretos.' });
   });
 });

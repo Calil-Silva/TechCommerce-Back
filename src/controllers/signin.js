@@ -29,7 +29,7 @@ export default async function signin(req, res) {
       token: uuidV4(),
     };
 
-    return res.status(202).send(userAuthenticator);
+    return res.status(200).send(userAuthenticator);
   } catch (error) {
     return res
       .status(500)
