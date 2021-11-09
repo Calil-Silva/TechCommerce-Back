@@ -12,18 +12,26 @@ afterAll(async () => {
   connection.end();
 });
 
+beforeAll(async () => {
+  await deleteUser();
+  await connection.query('DELETE FROM countries');
+});
+
 describe('POST /signin', () => {
   beforeEach(async () => {
     await insertUser(
       mockedUser.name,
       mockedUser.email,
-      mockedUser.hashedPassword()
+      mockedUser.hashedPassword(),
+      mockedUser.selectedCountry,
+      mockedUser.birthDate
     );
     await addNewSession();
   });
 
   afterEach(async () => {
     await deleteUser();
+    await connection.query('DELETE FROM countries');
   });
 
   test('Should return status code 200 and a body with user_id and token, if user is registered', async () => {
