@@ -5,11 +5,7 @@ import connection from '../database/database.js';
 
 export default async function signup(req, res) {
   const {
-    name,
-    selectedCountry,
-    birthDate,
-    email,
-    password,
+    name, selectedCountry, birthDate, email, password
   } = req.body;
 
   const schema = Joi.object({
