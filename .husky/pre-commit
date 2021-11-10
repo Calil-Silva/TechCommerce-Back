@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx eslint src
-npx jest
+npx jest -i
 npx eslint src
