@@ -28,6 +28,15 @@ export default async function signup(req, res) {
       return res.status(406).send({ message: invalidRequest.message });
     }
 
+    const findUser = await connection.query(
+      'SELECT * FROM users WHERE email = $1;',
+      [email]
+    );
+
+    if (findUser.rowCount !== 0) {
+      return res.status(400).send({ message: 'Usuário já cadastrado' });
+    }
+
     const searchCountry = await connection.query(
       'SELECT * FROM countries WHERE name = $1;',
       [selectedCountry]
