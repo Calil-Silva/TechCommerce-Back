@@ -12,18 +12,31 @@ afterAll(async () => {
   connection.end();
 });
 
+beforeEach(async () => {
+  await deleteUser();
+  await connection.query('DELETE FROM countries');
+});
+
+afterEach(async () => {
+  await deleteUser();
+  await connection.query('DELETE FROM countries');
+});
+
 describe('POST /signin', () => {
   beforeEach(async () => {
     await insertUser(
       mockedUser.name,
       mockedUser.email,
-      mockedUser.hashedPassword()
+      mockedUser.hashedPassword(),
+      mockedUser.selectedCountry,
+      mockedUser.birthDate
     );
     await addNewSession();
   });
 
   afterEach(async () => {
     await deleteUser();
+    await connection.query('DELETE FROM countries');
   });
 
   test('Should return status code 200 and a body with user_id and token, if user is registered', async () => {
@@ -31,6 +44,7 @@ describe('POST /signin', () => {
       email: mockedUser.email,
       password: mockedUser.password,
     };
+
     const result = await agent.post('/signin').send(connectionData);
     expect(result.status).toEqual(200);
     expect(result.body).toHaveProperty('token');

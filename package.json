@@ -5,9 +5,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:prod": "NODE_ENV=prod npx jest",
-    "test:dev": "NODE_ENV=dev npx jest --watchAll",
-    "test": "NODE_ENV=test npx jest --watchAll",
+    "test:prod": "NODE_ENV=prod npx -i jest",
+    "test:dev": "NODE_ENV=dev npx jest -i --watchAll",
+    "test": "NODE_ENV=test npx jest -i --watchAll",
     "start": "NODE_ENV=prod node ./src/server.js",
     "start:dev": "NODE_ENV=dev node ./src/server.js",
     "start:test": "NODE_ENV=test nodemon ./src/server.js"
@@ -36,6 +36,7 @@
     "joi": "^17.4.2",
     "nodemon": "^2.0.14",
     "pg": "^8.7.1",
+    "randexp": "^0.4.0",
     "supertest": "^6.1.6",
     "uuid": "^8.3.2"
   }

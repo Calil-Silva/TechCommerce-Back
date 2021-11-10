@@ -15,7 +15,7 @@ export default async function signin(req, res) {
     const dbPassword = dbUser.rows[0]?.password;
 
     if (userNotRegistered) {
-      return res.status(400).send({ message: 'Usuário ou senha incorretos.' });
+      return res.status(404).send({ message: 'Usuário ou senha incorretos.' });
     }
 
     const invalidPassword = !bcrypt.compareSync(reqPassword, dbPassword);
