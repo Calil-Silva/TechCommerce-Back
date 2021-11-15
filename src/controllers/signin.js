@@ -1,4 +1,4 @@
-import { v4 as uuidV4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import connection from '../database/database.js';
 
@@ -26,9 +26,9 @@ export default async function signin(req, res) {
 
     const userAuthenticator = {
       name: dbUser.rows[0]?.name,
-      token: uuidV4(),
+      email,
+      token: jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '300s' })
     };
-
     return res.status(200).send(userAuthenticator);
   } catch (error) {
     return res
