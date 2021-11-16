@@ -70,8 +70,8 @@ describe('PUT /checkout', () => {
 
   test('Should return status code 409 if informed products amount do not have total available', async () => {
     const userId = (await connection.query('SELECT id FROM users')).rows[0].id;
-    const token = (await connection.query('SELECT token FROM logged_users'))
-      .rows[0].token;
+    const { token } = (await connection.query('SELECT token FROM logged_users'))
+      .rows[0];
     const mockedOrderToken = [
       [
         {
@@ -103,8 +103,8 @@ describe('PUT /checkout', () => {
 
   test('Should return status code 200 if requested products are total available', async () => {
     const userId = (await connection.query('SELECT id FROM users')).rows[0].id;
-    const token = (await connection.query('SELECT token FROM logged_users'))
-      .rows[0].token;
+    const { token } = (await connection.query('SELECT token FROM logged_users'))
+      .rows[0];
     const mockedOrderToken = [
       [
         {
