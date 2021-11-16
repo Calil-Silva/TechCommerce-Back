@@ -29,6 +29,27 @@ export default async function signin(req, res) {
       token: uuidV4(),
     };
 
+    userAuthenticator.user_id = (
+      await connection.query('SELECT id FROM users WHERE name = $1;', [
+        userAuthenticator.name,
+      ])
+    ).rows[0].id;
+
+    const creditCard = await connection.query(
+      'SELECT creditcard FROM users where id = $1;',
+      [userAuthenticator.user_id]
+    );
+
+    if (creditCard.rowCount > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      userAuthenticator.creditCard = JSON.parse(creditCard.rows[0].creditcard);
+    }
+
+    await connection.query(
+      'INSERT INTO logged_users (token, user_id) VALUES ($1, $2);',
+      [userAuthenticator.token, userAuthenticator.user_id]
+    );
+
     return res.status(200).send(userAuthenticator);
   } catch (error) {
     return res

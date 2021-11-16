@@ -3,7 +3,6 @@ import '../src/setup/setup.js';
 import app from '../src/app.js';
 import connection from '../src/database/database.js';
 import { deleteUser, insertUser } from '../src/factories/userFactory.js';
-import { addNewSession } from '../src/factories/sessionsFactory.js';
 import { mockedUser } from '../src/mocks/userMock.js';
 
 const agent = supertest(app);

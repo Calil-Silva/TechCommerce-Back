@@ -3,4 +3,3 @@
 
 npx eslint src
 npx jest -i
-npx eslint src
