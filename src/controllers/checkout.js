@@ -39,10 +39,6 @@ export default async function checkout(req, res) {
         .send({ message: 'Faça o login antes de continuar.' });
     }
 
-    if (dbToken !== userInfo.token) {
-      return res.status(400).send({ message: 'Erro desconhecido' });
-    }
-
     // eslint-disable-next-line no-restricted-syntax
     for (const [index, value] of order.entries()) {
       const availableStock = await connection.query(

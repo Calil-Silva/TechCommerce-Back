@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import { v4 as uuidV4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import connection from '../database/database.js';
@@ -44,6 +45,10 @@ export default async function signin(req, res) {
       // eslint-disable-next-line prefer-destructuring
       userAuthenticator.creditCard = JSON.parse(creditCard.rows[0].creditcard);
     }
+
+    await connection.query('DELETE FROM logged_users WHERE user_id = $1;', [
+      userAuthenticator.user_id,
+    ]);
 
     await connection.query(
       'INSERT INTO logged_users (token, user_id) VALUES ($1, $2);',

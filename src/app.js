@@ -5,7 +5,6 @@ import signin from './controllers/signin.js';
 import signup from './controllers/signup.js';
 import products from './controllers/products.js';
 import checkout from './controllers/checkout.js';
-import signout from './controllers/signout.js';
 
 const app = express();
 
@@ -17,6 +16,5 @@ app.post('/signin', signin);
 app.post('/signup', signup);
 app.get('/products', products);
 app.put('/checkout', checkout);
-app.delete('/signout', signout);
 
 export default app;
