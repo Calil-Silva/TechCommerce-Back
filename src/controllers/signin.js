@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import { v4 as uuidV4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import connection from '../database/database.js';
@@ -28,6 +29,31 @@ export default async function signin(req, res) {
       name: dbUser.rows[0]?.name,
       token: uuidV4(),
     };
+
+    userAuthenticator.user_id = (
+      await connection.query('SELECT id FROM users WHERE name = $1;', [
+        userAuthenticator.name,
+      ])
+    ).rows[0].id;
+
+    const creditCard = await connection.query(
+      'SELECT creditcard FROM users where id = $1;',
+      [userAuthenticator.user_id]
+    );
+
+    if (creditCard.rowCount > 0) {
+      // eslint-disable-next-line prefer-destructuring
+      userAuthenticator.creditCard = JSON.parse(creditCard.rows[0].creditcard);
+    }
+
+    await connection.query('DELETE FROM logged_users WHERE user_id = $1;', [
+      userAuthenticator.user_id,
+    ]);
+
+    await connection.query(
+      'INSERT INTO logged_users (token, user_id) VALUES ($1, $2);',
+      [userAuthenticator.token, userAuthenticator.user_id]
+    );
 
     return res.status(200).send(userAuthenticator);
   } catch (error) {
