@@ -8,18 +8,16 @@ import { insertAllCategories } from '../src/factories/categoriesFactory.js';
 const agent = supertest(app);
 
 afterAll(async () => {
-  await connection.query('DELETE FROM products CASCADE;');
-  await connection.query('DELETE FROM categories CASCADE;');
-  await connection.query('DELETE FROM product_sku CASCADE;');
+  await connection.query('DELETE FROM products;');
+  await connection.query('DELETE FROM categories;');
   await connection.query('ALTER SEQUENCE products_id_seq RESTART WITH 1;');
   await connection.query('ALTER SEQUENCE categories_id_seq RESTART WITH 1;');
   connection.end();
 });
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM products CASCADE;');
-  await connection.query('DELETE FROM categories CASCADE;');
-  await connection.query('DELETE FROM product_sku CASCADE;');
+  await connection.query('DELETE FROM products;');
+  await connection.query('DELETE FROM categories;');
   await connection.query('ALTER SEQUENCE products_id_seq RESTART WITH 1;');
   await connection.query('ALTER SEQUENCE categories_id_seq RESTART WITH 1;');
   insertAllCategories();
