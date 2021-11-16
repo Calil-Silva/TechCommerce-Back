@@ -17,6 +17,9 @@
         ],
         "comma-dangle": 0,
         "no-undef": 0,
-        "radix": 0
+        "radix": 0,
+        "operator-linebreak": 0,
+        "import/prefer-default-export": 0,
+        "no-plusplus": 0
     }
 }
