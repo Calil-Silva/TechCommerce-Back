@@ -4,10 +4,7 @@ import app from '../src/app.js';
 import connection from '../src/database/database.js';
 import {
   insertAllCategories,
-  InsertAllCategories,
-  resetTableCategories,
 } from '../src/factories/categoriesFactory.js';
-import { base } from '../src/factories/productsFactory.js';
 
 const agent = supertest(app);
 
