@@ -5,18 +5,18 @@ import connection from '../src/database/database.js';
 import {
   insertAllCategories,
 } from '../src/factories/categoriesFactory.js';
+import { insertAllProducts } from '../src/factories/productsFactory.js';
 
 const agent = supertest(app);
 
 afterAll(async () => {
-  await connection.query('DELETE FROM categories CASCADE;');
+  await connection.query('DELETE FROM categories;');
   await connection.query('ALTER SEQUENCE categories_id_seq RESTART WITH 1;');
-  insertAllCategories();
   connection.end();
 });
 
 beforeAll(async () => {
-  await connection.query('DELETE FROM categories CASCADE;');
+  await connection.query('DELETE FROM categories;');
   await connection.query('ALTER SEQUENCE categories_id_seq RESTART WITH 1;');
   insertAllCategories();
 });
